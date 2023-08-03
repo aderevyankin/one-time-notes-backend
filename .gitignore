@@ -1,4 +1,3 @@
-.env
 ### Jetbrains IDE custom template
 
 # Every plugin and inner IDE tool creates its own XML config, so
