@@ -1,10 +1,10 @@
 import Note from './Note.js';
+import NoteService from './NoteService.js';
 
 class NoteController {
     async create(request, response) {
         try {
-            const {author, title, content} = request.body;
-            const note = await Note.create({author, title, content});
+            const note = await Note.create(request.body);
             response.json(note);
         } catch (exception) {
             response.status(500).json(exception);
@@ -13,7 +13,7 @@ class NoteController {
 
     async getAll(request, response) {
         try {
-            const notes = await Note.find();
+            const notes = await NoteService.getAll();
             return response.json(notes);
         } catch (exception) {
             response.status(500).json(exception);
@@ -22,11 +22,7 @@ class NoteController {
 
     async getOne(request, response) {
         try {
-            const {id} = request.params;
-            if (!id) {
-                response.status(400).json({message: 'Id не указан!'});
-            }
-            const note = await Note.findById(id);
+            const note = await NoteService.getOne(request.params.id);
             return response.json(note);
         } catch (exception) {
             response.status(500).json(exception);
@@ -35,11 +31,7 @@ class NoteController {
 
     async update(request, response) {
         try {
-            const note = request.body;
-            if (!note._id) {
-                response.status(400).json({message: 'Id не указан!'});
-            }
-            const updatedNote = await Note.findByIdAndUpdate(note._id, note, {new: true});
+            const updatedNote = await NoteService.update(request.body);
             return response.json(updatedNote);
         } catch (exception) {
             response.status(500).json(exception);
@@ -48,11 +40,7 @@ class NoteController {
 
     async delete(request, response) {
         try {
-            const {id} = request.params;
-            if (!id) {
-                response.status(400).json({message: 'Id не указан!'});
-            }
-            const note = await Note.findByIdAndDelete(id);
+            const note = await NoteService.delete(request.params.id);
             return response.json(note);
         } catch (exception) {
             response.status(500).json(exception);
