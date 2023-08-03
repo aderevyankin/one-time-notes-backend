@@ -1,5 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import 'dotenv/config';
+
 import router from './router.js';
 
 const PORT = process.env.PORT;
@@ -18,6 +20,6 @@ async function startApp() {
     } catch (exception) {
         console.error(exception);
     }
-};
+}
 
 startApp();
