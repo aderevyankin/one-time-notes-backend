@@ -1,10 +1,9 @@
-import Note from './Note.js';
 import NoteService from './NoteService.js';
 
 class NoteController {
     async create(request, response) {
         try {
-            const note = await Note.create(request.body);
+            const note= await NoteService.create(request.body);
             response.json(note);
         } catch (exception) {
             response.status(500).json(exception);

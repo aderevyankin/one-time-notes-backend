@@ -1,14 +1,17 @@
-import mongoose from 'mongoose';
+import {Schema, model} from 'mongoose';
 
-const Note = new mongoose.Schema({
-            author: {type: String, required: true},
+const Note = new Schema({
+            userId: {
+                type: Schema.Types.ObjectId,
+                ref: 'User', required: true,
+            },
             title: {type: String, required: false},
             content: {type: String, required: true},
-            isRead:{
+            isRead: {
                 type: Boolean,
-                default: false
-            }
+                default: false,
+            },
         },
         {timestamps: true},
 );
-export default mongoose.model('Note', Note);
+export default model('Note', Note);
