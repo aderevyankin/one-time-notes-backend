@@ -1,4 +1,5 @@
 import Note from './Note.js';
+import UserService from './UserService.js';
 
 class NoteService {
     async create(note) {
@@ -14,9 +15,13 @@ class NoteService {
         return note;
     }
 
-    async getAll() {
-        const notes = await Note.find();
-        return notes;
+    async getAll(userId) {
+        const currentUser = await UserService.getPostUser(userId);
+        if (!currentUser){
+            throw new Error('Пользователь не найден!');
+        }
+        const userNotes = await Note.find({userId: userId});
+        return userNotes;
     }
 
     async update(note) {

@@ -6,11 +6,19 @@ class UserService {
         return createdUser;
     }
 
-    async getMe(login, password) {
-        if (!login || !password) {
+    async getMe(data) {
+        if (!data.login || !data.password) {
             throw new Error('укажите логин и пароль!');
         }
-        const user = User.find({login: login, password: password});
+        const user = User.find({login: data.login, password: data.password});
+        return user;
+    }
+
+    async getNoteUser(id) {
+        if (!id) {
+            throw new Error('Пользователь отсутствует!');
+        }
+        const user = User.findById(id);
         return user;
     }
 
@@ -32,5 +40,3 @@ class UserService {
 }
 
 export default new UserService();
-
-// TODO: https://stackoverflow.com/questions/70622903/a-way-to-join-posts-with-users-in-mongoose

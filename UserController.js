@@ -12,7 +12,7 @@ class UserController {
 
     async getMe(request, response) {
         try {
-            const user = await UserService.getMe(request.params.login, request.params.password);
+            const user = await UserService.getMe(request.body);
             response.json(user);
         } catch (exception) {
             response.status(500).json(exception);
@@ -27,6 +27,7 @@ class UserController {
             response.status(500).json(exception);
         }
     }
+
     async delete(request, response) {
         try {
             const user = await UserService.delete(request.params.id);

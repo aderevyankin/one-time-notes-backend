@@ -12,7 +12,7 @@ class NoteController {
 
     async getAll(request, response) {
         try {
-            const notes = await NoteService.getAll();
+            const notes = await NoteService.getAll(request.params.userId);
             return response.json(notes);
         } catch (exception) {
             response.status(500).json(exception);
