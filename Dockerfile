@@ -8,6 +8,9 @@ COPY ./index.js .
 COPY Note.js .
 COPY NoteController.js .
 COPY NoteService.js .
+COPY User.js .
+COPY UserController.js .
+COPY UserService.js .
 COPY router.js .
 
 RUN npm install
